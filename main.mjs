@@ -16,7 +16,9 @@ import { fb_initialise }
     from './fb_io.mjs';
     window.fb_initialise   = fb_initialise;
 
-import { FB_GAMECONFIG, FB_GAMEAPP } from "./fb_io.mjs";
+import { fb_authenticate } 
+    from './fb_io.mjs';
+    window.fb_authenticate = fb_authenticate;
 /**************************************************************/
 // index.html main code
 /**************************************************************/
