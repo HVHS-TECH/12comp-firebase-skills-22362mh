@@ -16,13 +16,17 @@ console.log('%c fb_io.mjs',
 /**************************************************************/
 // Import all the methods you want to call from the firebase modules
 
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+import { signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+
+import { ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 function fb_authenticate(){
     const AUTH = getAuth();
@@ -38,39 +42,70 @@ function fb_authenticate(){
         })
         .catch((error) => {
             //Code for an authentication error goes here
-            console.log("Error");
             console.log(error);
         });
 }
 
+function fb_login(){
+    const AUTH = getAuth();
+    onAuthStateChanged(AUTH, (user) => {
+        if (user) {
+            document.getElementById("p_fbLogin").innerHTML= "Logged in";
+        } else {
+            document.getElementById("p_fbLogin").innerHTML= "Logged out";
+        }
+    }, (error) => {
+        console.log(error);
+    });
+}
 
+function fb_logout(){
+    const AUTH = getAuth();
+    signOut(AUTH).then(() => {
+        document.getElementById("p_fbLogin").innerHTML= "Logged out";
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+}
 
+const FB_GAMECONFIG = {
+    apiKey: "AIzaSyCd2Z_1nM5CI6l6NVOrvlN7EDbKEaSTiv0",
+    authDomain: "comp-2025-mio-hoffman.firebaseapp.com",
+    databaseURL: "https://comp-2025-mio-hoffman-default-rtdb.firebaseio.com",
+    projectId: "comp-2025-mio-hoffman",
+    storageBucket: "comp-2025-mio-hoffman.firebasestorage.app",
+    messagingSenderId: "724400775542",
+    appId: "1:724400775542:web:dccd0b43fb6bc612725a57",
+    measurementId: "G-GYKCG77RCD"
+  };
+
+function fb_writeRec(){
+    const whereToWriteTo = "Fruit/Citrus/Lemon/colour"
+    const dataToWrite = {yellow: true, warm: true};
+    var reference = ref(FB_GAMEDB, whereToWriteTo);
+    set(reference, dataToWrite).then(() => {
+        document.getElementById("p_fbWriteRec").innerHTML= "Data entered";
+    }).catch((error) => {
+        console.log(error);
+    });
+}
 
 /**************************************************************/
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
 /**************************************************************/
 export { 
-    fb_initialise, fb_authenticate };
+    fb_initialise, fb_authenticate, fb_login, fb_logout, fb_writeRec };
 
-
+var FB_GAMEDB
 
 function fb_initialise() {
     console.log('%c fb_initialise(): ', 
                 'color: ' + COL_C + '; background-color: ' + COL_B + ';');
-                const FB_GAMECONFIG = {
-                    apiKey: "AIzaSyCd2Z_1nM5CI6l6NVOrvlN7EDbKEaSTiv0",
-                    authDomain: "comp-2025-mio-hoffman.firebaseapp.com",
-                    databaseURL: "https://comp-2025-mio-hoffman-default-rtdb.firebaseio.com",
-                    projectId: "comp-2025-mio-hoffman",
-                    storageBucket: "comp-2025-mio-hoffman.firebasestorage.app",
-                    messagingSenderId: "724400775542",
-                    appId: "1:724400775542:web:dccd0b43fb6bc612725a57",
-                    measurementId: "G-GYKCG77RCD"
-                  };
                 
                 const FB_GAMEAPP = initializeApp(FB_GAMECONFIG);
-                 var FB_GAMEDB  = getDatabase(FB_GAMEAPP);
+                FB_GAMEDB  = getDatabase(FB_GAMEAPP);
                 console.info(FB_GAMEDB);  
                 
                 const app = initializeApp(FB_GAMECONFIG);
