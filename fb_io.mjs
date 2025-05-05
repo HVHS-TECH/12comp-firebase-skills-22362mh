@@ -27,6 +27,7 @@ import { signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.
 
 
 import { ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { get, update }from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 function fb_authenticate(){
     const AUTH = getAuth();
@@ -85,7 +86,47 @@ function fb_writeRec(){
     const dataToWrite = {yellow: true, warm: true};
     var reference = ref(FB_GAMEDB, whereToWriteTo);
     set(reference, dataToWrite).then(() => {
-        document.getElementById("p_fbWriteRec").innerHTML= "Data entered";
+        document.getElementById("p_fbWriteRec").innerHTML= "Success";
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+function fb_readRec(){
+    const whereToReadFrom = "Fruit/Citrus/Tangelo/taste";
+    const reference = ref(FB_GAMEDB, whereToReadFrom);
+    get(reference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+            document.getElementById("p_fbReadRec").innerHTML= "Success";
+        } else {
+            document.getElementById("p_fbReadRec").innerHTML= "No record found";
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+function fb_readAll(){
+    const whereToReadFrom = "Fruit/Citrus";
+    const reference = ref(FB_GAMEDB, whereToReadFrom);
+    get(reference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+            document.getElementById("p_fbReadAll").innerHTML= "Success";
+        } else {
+            document.getElementById("p_fbReadAll").innerHTML= "No records found";
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+function fb_updateRec(){
+    const whereToWriteTo = "Fruit/Citrus/Tangelo/taste";
+    const reference = ref(FB_GAMEDB, whereToWriteTo);
+    update(reference, _data).then(() => {
+        document.getElementById("p_fbUpdateRec").innerHTML= "success";
     }).catch((error) => {
         console.log(error);
     });
@@ -96,7 +137,8 @@ function fb_writeRec(){
 // List all the functions called by code or html outside of this module
 /**************************************************************/
 export { 
-    fb_initialise, fb_authenticate, fb_login, fb_logout, fb_writeRec };
+    fb_initialise, fb_authenticate, fb_login, fb_logout, fb_writeRec,
+    fb_readRec, fb_readAll };
 
 var FB_GAMEDB
 

@@ -31,6 +31,14 @@ import { fb_logout }
 import { fb_writeRec } 
     from './fb_io.mjs';
     window.fb_writeRec = fb_writeRec;
+
+import { fb_readRec }
+    from './fb_io.mjs';
+    window.fb_readRec = fb_readRec;
+
+import { fb_readAll }
+    from './fb_io.mjs';
+    window.fb_readAll = fb_readAll;
 /**************************************************************/
 // index.html main code
 /**************************************************************/
