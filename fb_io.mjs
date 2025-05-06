@@ -28,7 +28,8 @@ import { signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.
 
 import { ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 import { get, update }from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-
+import { query, orderByChild, limitToFirst } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+ 
 function fb_authenticate(){
     const AUTH = getAuth();
     const PROVIDER = new GoogleAuthProvider();
@@ -124,9 +125,26 @@ function fb_readAll(){
 
 function fb_updateRec(){
     const whereToWriteTo = "Fruit/Citrus/Tangelo/taste";
+    const dataToWrite = {taste: "not yummy"};
     const reference = ref(FB_GAMEDB, whereToWriteTo);
-    update(reference, _data).then(() => {
+    update(reference, dataToWrite).then(() => {
         document.getElementById("p_fbUpdateRec").innerHTML= "success";
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+function fb_readSorted(){
+    const whereToReadFrom = "Fruit/Citrus";
+    const reference = query(ref(FB_GAMECONFIG, whereToReadFrom), 
+    orderByChild(sortkey), limitToFirst(numberToRead));
+    get(reference).then((snapshot) => {
+        var fb_data = snapshot.val();
+      if (fb_data != null) {
+            document.getElementById("p_fbReadSorted").innerHTML= "Success: Record found";
+        } else {
+            document.getElementById("p_fbReadSorted").innerHTML= "Success: Record NOT found";
+        }
     }).catch((error) => {
         console.log(error);
     });
@@ -138,7 +156,7 @@ function fb_updateRec(){
 /**************************************************************/
 export { 
     fb_initialise, fb_authenticate, fb_login, fb_logout, fb_writeRec,
-    fb_readRec, fb_readAll };
+    fb_readRec, fb_readAll, fb_updateRec, fb_readSorted };
 
 var FB_GAMEDB
 

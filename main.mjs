@@ -39,6 +39,14 @@ import { fb_readRec }
 import { fb_readAll }
     from './fb_io.mjs';
     window.fb_readAll = fb_readAll;
+
+import { fb_updateRec }
+    from './fb_io.mjs';
+    window.fb_updateRec = fb_updateRec;
+
+import { fb_readSorted }
+    from './fb_io.mjs';
+    window.fb_readSorted = fb_readSorted;
 /**************************************************************/
 // index.html main code
 /**************************************************************/
