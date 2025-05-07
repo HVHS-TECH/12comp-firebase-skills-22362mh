@@ -135,11 +135,13 @@ function fb_updateRec(){
 }
 
 function fb_readSorted(){
-    const whereToReadFrom = "Fruit/Citrus";
-    const reference = query(ref(FB_GAMECONFIG, whereToReadFrom), 
-    orderByChild(sortkey), limitToFirst(numberToRead));
+    const whereToReadFrom = "Dogs";
+    const sortkey = "Cuteness";
+    const numberToRead = 5;
+    const reference = query(ref(FB_GAMEDB, whereToReadFrom), orderByChild(sortkey), limitToFirst(numberToRead));
     get(reference).then((snapshot) => {
         var fb_data = snapshot.val();
+        console.log(fb_data);
       if (fb_data != null) {
             document.getElementById("p_fbReadSorted").innerHTML= "Success: Record found";
         } else {
