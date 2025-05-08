@@ -47,6 +47,10 @@ import { fb_updateRec }
 import { fb_readSorted }
     from './fb_io.mjs';
     window.fb_readSorted = fb_readSorted;
+
+import { fb_onValue }
+    from './fb_io.mjs';
+    window.fb_onValue = fb_onValue;
 /**************************************************************/
 // index.html main code
 /**************************************************************/

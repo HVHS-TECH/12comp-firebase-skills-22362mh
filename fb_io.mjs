@@ -30,6 +30,8 @@ import { ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-data
 import { get, update }from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 import { query, orderByChild, limitToFirst } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
  
+import { onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
 function fb_authenticate(){
     const AUTH = getAuth();
     const PROVIDER = new GoogleAuthProvider();
@@ -146,6 +148,21 @@ function fb_readSorted(){
             document.getElementById("p_fbReadSorted").innerHTML= "Success: Record found";
         } else {
             document.getElementById("p_fbReadSorted").innerHTML= "Success: Record NOT found";
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+function fb_onValue(){
+    const monitorAndRead = "Dogs/Chihuahua/Cuteness";
+    const dbReference = ref(FB_GAMEDB, monitorAndRead);
+    onValue(dbReference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+            document.getElementById("p_fbListen").innerHTML= "Success";
+        } else {
+            document.getElementById("p_fbListen").innerHTML= "No record found";
         }
     }).catch((error) => {
         console.log(error);
