@@ -86,7 +86,7 @@ const FB_GAMECONFIG = {
 
 function fb_writeRec(){
     const whereToWriteTo = "Fruit/Citrus/Lemon/colour"
-    const dataToWrite = {yellow: true, warm: true};
+    const dataToWrite = {yellow: true, warm: true, value:Math.random()};
     var reference = ref(FB_GAMEDB, whereToWriteTo);
     set(reference, dataToWrite).then(() => {
         document.getElementById("p_fbWriteRec").innerHTML= "Success";
