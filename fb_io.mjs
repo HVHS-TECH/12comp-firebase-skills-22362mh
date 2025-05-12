@@ -30,7 +30,7 @@ import { ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-data
 import { get, update }from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 import { query, orderByChild, limitToFirst } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
  
-import { onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { onValue, remove } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 function fb_authenticate(){
     const AUTH = getAuth();
@@ -155,7 +155,7 @@ function fb_readSorted(){
 }
 
 function fb_onValue(){
-    const monitorAndRead = "Dogs/Chihuahua/Cuteness";
+    const monitorAndRead = "Fruit/Citrus/Lemon/sour";
     const dbReference = ref(FB_GAMEDB, monitorAndRead);
     onValue(dbReference).then((snapshot) => {
         var fb_data = snapshot.val();
@@ -169,13 +169,22 @@ function fb_onValue(){
     });
 }
 
+function fb_deleteRec(){
+    const whatToDelete = "Sports/Basketball";
+     const dbReference= ref(FB_GAMEDB, whatToDelete);
+    remove(dbReference).then(() => {
+        document.getElementById("p_fbDeleteRec").innerHTML= "Success";
+    }).catch((error) => {
+        console.log(error);
+    });
+}
 /**************************************************************/
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
 /**************************************************************/
 export { 
     fb_initialise, fb_authenticate, fb_login, fb_logout, fb_writeRec,
-    fb_readRec, fb_readAll, fb_updateRec, fb_readSorted };
+    fb_readRec, fb_readAll, fb_updateRec, fb_readSorted, fb_onValue, fb_deleteRec};
 
 var FB_GAMEDB
 

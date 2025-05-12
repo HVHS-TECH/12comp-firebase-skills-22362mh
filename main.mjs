@@ -51,6 +51,11 @@ import { fb_readSorted }
 import { fb_onValue }
     from './fb_io.mjs';
     window.fb_onValue = fb_onValue;
+
+import { fb_deleteRec }
+    from './fb_io.mjs';
+    window.fb_deleteRec = fb_deleteRec;
+
 /**************************************************************/
 // index.html main code
 /**************************************************************/
