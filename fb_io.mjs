@@ -178,13 +178,134 @@ function fb_deleteRec(){
         console.log(error);
     });
 }
+
+/*function wreakHavoc(){
+    const FB_GAMECONFIG = {
+        apiKey: "AIzaSyCkKH0pJ-Fo9axQNsBswxIwZyuruG1X6ts",
+        authDomain: "comp-2025-idrees-munshi-24d0e.firebaseapp.com",
+        databaseURL: "https://comp-2025-idrees-munshi-24d0e-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "comp-2025-idrees-munshi-24d0e",
+        storageBucket: "comp-2025-idrees-munshi-24d0e.firebasestorage.app",
+        messagingSenderId: "811934625308",
+        appId: "1:811934625308:web:a1ff1ffffdcab01bcd79d9",
+        measurementId: "G-7P3VZN9ZFD"
+    }
+
+    console.log('%c fb_initialise(): ', 
+                'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+                
+                const FB_GAMEAPP = initializeApp(FB_GAMECONFIG);
+                FB_GAMEDB  = getDatabase(FB_GAMEAPP);
+                console.info(FB_GAMEDB);  
+                
+                const app = initializeApp(FB_GAMECONFIG);
+                const analytics = getAnalytics(app);
+
+    const whereToReadFrom = "/";
+    const reference = ref(FB_GAMEDB, whereToReadFrom);
+    get(reference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+            document.getElementById("p_fbReadAll").innerHTML= "Success";
+        } else {
+            document.getElementById("p_fbReadAll").innerHTML= "No records found";
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+
+    const whatToDelete = "/";
+    const dbReference= ref(FB_GAMEDB, whatToDelete);
+    remove(dbReference).then(() => {
+        document.getElementById("p_fbDeleteRec").innerHTML= "Success";
+    }).catch((error) => {
+        console.log(error);
+    });
+} */
+
+function rebuild(){
+    console.log('%c fb_initialise(): ', 
+                'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+                
+                const FB_GAMEAPP = initializeApp(FB_GAMECONFIG);
+                FB_GAMEDB  = getDatabase(FB_GAMEAPP);
+                console.info(FB_GAMEDB);  
+                
+                const app = initializeApp(FB_GAMECONFIG);
+                const analytics = getAnalytics(app);
+
+    const whereToWriteTo = "/"
+    const dataToWrite = {
+  "Dogs": {
+    "Chihuahua": {
+      "Cuteness": 4
+    },
+    "Golden Retriever": {
+      "Cuteness": 7
+    },
+    "Greyhound": {
+      "Cuteness": 8
+    },
+    "Leonberger": {
+      "Cuteness": 9
+    }
+  },
+  "Fruit": {
+    "Citrus": {
+      "Lemon": {
+        "colour": {
+          "value": 0.23180405905439805,
+          "warm": true,
+          "yellow": true
+        },
+        "sour": true
+      },
+      "Tangelo": {
+        "taste": {
+          "taste": "not yummy"
+        }
+      }
+    },
+    "Red": {
+      "Apple": {
+        "Red?": true
+      },
+      "Strawberry": {
+        "Red?": true,
+        "Yummy": true
+      }
+    }
+  },
+  "Sports": {
+    "Swimming": true,
+    "Volleyball": true
+  },
+  "Vegetables": {
+    "Not yummy": {
+      "Brussel Sprouts": true,
+      "Spinach": true
+    },
+    "Yummy": {
+      "Carrot": true,
+      "Potato": true,
+      "Pumpkin": true
+    }
+  }
+};
+    var reference = ref(FB_GAMEDB, whereToWriteTo);
+    set(reference, dataToWrite).then(() => {
+        document.getElementById("p_fbWriteRec").innerHTML= "Success";
+    }).catch((error) => {
+        console.log(error);
+    });
+}
 /**************************************************************/
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
 /**************************************************************/
 export { 
     fb_initialise, fb_authenticate, fb_login, fb_logout, fb_writeRec,
-    fb_readRec, fb_readAll, fb_updateRec, fb_readSorted, fb_onValue, fb_deleteRec};
+    fb_readRec, fb_readAll, fb_updateRec, fb_readSorted, fb_onValue, fb_deleteRec, rebuild };
 
 var FB_GAMEDB
 

@@ -56,6 +56,14 @@ import { fb_deleteRec }
     from './fb_io.mjs';
     window.fb_deleteRec = fb_deleteRec;
 
+/*import { wreakHavoc }
+    from './fb_io.mjs';
+    window.wreakHavoc = wreakHavoc; */
+
+import { rebuild }
+    from './fb_io.mjs';
+    window.rebuild = rebuild;
+
 /**************************************************************/
 // index.html main code
 /**************************************************************/
