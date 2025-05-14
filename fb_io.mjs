@@ -155,7 +155,7 @@ function fb_readSorted(){
 }
 
 function fb_onValue(){
-    const monitorAndRead = "Fruit/Citrus/Lemon/sour";
+    const monitorAndRead = "Fruit/Citrus/Lemon";
     const dbReference = ref(FB_GAMEDB, monitorAndRead);
     onValue(dbReference).then((snapshot) => {
         var fb_data = snapshot.val();
@@ -179,16 +179,16 @@ function fb_deleteRec(){
     });
 }
 
-/*function wreakHavoc(){
+function wreakHavoc(){
     const FB_GAMECONFIG = {
-        apiKey: "AIzaSyCkKH0pJ-Fo9axQNsBswxIwZyuruG1X6ts",
-        authDomain: "comp-2025-idrees-munshi-24d0e.firebaseapp.com",
-        databaseURL: "https://comp-2025-idrees-munshi-24d0e-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "comp-2025-idrees-munshi-24d0e",
-        storageBucket: "comp-2025-idrees-munshi-24d0e.firebasestorage.app",
-        messagingSenderId: "811934625308",
-        appId: "1:811934625308:web:a1ff1ffffdcab01bcd79d9",
-        measurementId: "G-7P3VZN9ZFD"
+        apiKey: "AIzaSyB5B5P_sSmNTN7RjkaV-I2TKNUJWj0cF1A",
+        authDomain: "comp-2025-carmen-o-grady.firebaseapp.com",
+        databaseURL: "https://comp-2025-carmen-o-grady-default-rtdb.firebaseio.com",
+        projectId: "comp-2025-carmen-o-grady",
+        storageBucket: "comp-2025-carmen-o-grady.appspot.com",
+        messagingSenderId: "1046417795904",
+        appId: "1:1046417795904:web:25cff308e04c73eb5968a5",
+        measurementId: "G-BGRNW3X6K8"
     }
 
     console.log('%c fb_initialise(): ', 
@@ -214,14 +214,14 @@ function fb_deleteRec(){
         console.log(error);
     });
 
-    const whatToDelete = "/";
+    /*const whatToDelete = "/";
     const dbReference= ref(FB_GAMEDB, whatToDelete);
     remove(dbReference).then(() => {
         document.getElementById("p_fbDeleteRec").innerHTML= "Success";
     }).catch((error) => {
         console.log(error);
-    });
-} */
+    });*/
+} 
 
 function rebuild(){
     console.log('%c fb_initialise(): ', 
@@ -305,7 +305,8 @@ function rebuild(){
 /**************************************************************/
 export { 
     fb_initialise, fb_authenticate, fb_login, fb_logout, fb_writeRec,
-    fb_readRec, fb_readAll, fb_updateRec, fb_readSorted, fb_onValue, fb_deleteRec, rebuild };
+    fb_readRec, fb_readAll, fb_updateRec, fb_readSorted, fb_onValue, fb_deleteRec, rebuild,
+    wreakHavoc };
 
 var FB_GAMEDB
 
