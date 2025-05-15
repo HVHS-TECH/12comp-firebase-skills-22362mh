@@ -6,7 +6,7 @@
 // All variables & function begin with fb_  all const with FB_
 // Diagnostic code lines have a comment appended to them //DIAG
 /**************************************************************/
-const COL_C = 'white';	    // These two const are part of the coloured 	
+const COL_C = 'white';	    // These two const are part of the coloured
 const COL_B = '#CD7F32';	//  console.log for functions scheme
 console.log('%c fb_io.mjs',
             'color: blue; background-color: white;');
@@ -155,7 +155,7 @@ function fb_readSorted(){
 }
 
 function fb_onValue(){
-    const monitorAndRead = "Fruit/Citrus/Lemon";
+    const monitorAndRead = "Fruit/Citrus/Tangelo/taste";
     const dbReference = ref(FB_GAMEDB, monitorAndRead);
     onValue(dbReference).then((snapshot) => {
         var fb_data = snapshot.val();
@@ -221,7 +221,7 @@ function wreakHavoc(){
     }).catch((error) => {
         console.log(error);
     });*/
-} 
+}
 
 function rebuild(){
     console.log('%c fb_initialise(): ', 
@@ -229,7 +229,7 @@ function rebuild(){
                 
                 const FB_GAMEAPP = initializeApp(FB_GAMECONFIG);
                 FB_GAMEDB  = getDatabase(FB_GAMEAPP);
-                console.info(FB_GAMEDB);  
+                console.info(FB_GAMEDB);
                 
                 const app = initializeApp(FB_GAMECONFIG);
                 const analytics = getAnalytics(app);
